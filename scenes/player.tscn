@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dp6516dnx1wd3"]
+
+[ext_resource type="Texture2D" uid="uid://c0llubdqun72s" path="res://icon.svg" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://yh8i07quj8wu" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="PackedScene" uid="uid://b7dg1bewj5um2" path="res://scenes/revive_area.tscn" id="3_qhqgy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
+radius = 65.00769
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
+radius = 39.012817
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+script = ExtResource("1_g2els")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3vyb7")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_g2els")
+
+[node name="Hurtbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qhqgy")
+debug_color = Color(0.9831392, 0, 0.36008546, 0.41960785)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
+[node name="ReviveArea" parent="." instance=ExtResource("3_qhqgy")]

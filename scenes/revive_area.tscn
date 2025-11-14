@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7dg1bewj5um2"]
+
+[ext_resource type="Script" uid="uid://dr18qr7ei4ul1" path="res://scripts/revive_area.gd" id="1_akbc0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_akbc0"]
+radius = 122.03688
+
+[node name="ReviveArea" type="Polygon2D"]
+color = Color(0, 1, 0, 1)
+offset = Vector2(272, -34)
+polygon = PackedVector2Array(-274, -62, -127, -27, -73, 36, -118, 82, -265.3365, 122.50861, -378.0722, 93.51942, -450.54517, 24.267485, -397.39835, -43.373947)
+uv = PackedVector2Array(-274, -62, -127, -27, -73, 36, -118, 82, -265.3365, 122.50861, -378.0722, 93.51942, -460.20822, 22.656975, -395.78784, -53.037006)
+script = ExtResource("1_akbc0")
+
+[node name="ReviveArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReviveArea"]
+shape = SubResource("CircleShape2D_akbc0")
