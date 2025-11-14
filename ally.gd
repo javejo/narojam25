@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Enemy
+class_name Ally
 
 @export var stats: EnemyStats
 var player = null
@@ -7,7 +7,7 @@ var speed = 100
 
 func _ready():
 	$Sprite2D.texture = stats.sprite
-	$Damage.text = str(stats.health)
+	#$Damage.text = str(stats.health)
 	player = get_tree().get_first_node_in_group("Player")
 	#speed = stats.speed
 	
@@ -18,8 +18,3 @@ func _physics_process(delta):
 		move_and_slide()
 	
 	# Si la distancia es inferior a X poner que velocidad = 0
-
-
-func _on_hitbox_area_entered(area: Area2D) -> void:
-	if area.is_in_group("Player"):
-		queue_free()

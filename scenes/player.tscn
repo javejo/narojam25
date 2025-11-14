@@ -7,7 +7,7 @@
 radius = 65.00769
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
-radius = 39.012817
+radius = 73.552704
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 2
@@ -20,9 +20,10 @@ texture = ExtResource("1_3vyb7")
 shape = SubResource("CircleShape2D_g2els")
 disabled = true
 
-[node name="Hurtbox" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_qhqgy")
-debug_color = Color(0.9831392, 0, 0.36008546, 0.41960785)
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+
+[node name="Hurtbox" type="Area2D" parent="." groups=["Player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_qhqgy")

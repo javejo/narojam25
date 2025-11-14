@@ -19,7 +19,7 @@ stats = ExtResource("2_md0e3")
 scale = Vector2(2, 2)
 texture = ExtResource("3_4ra3w")
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_md0e3")
 
 [node name="Damage" type="Label" parent="."]
@@ -39,8 +39,9 @@ theme_override_font_sizes/font_size = 31
 text = "HIT"
 horizontal_alignment = 1
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_4ra3w")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
