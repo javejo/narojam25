@@ -1,20 +1,24 @@
 [gd_scene load_steps=5 format=3 uid="uid://bbpnohwlm26rf"]
 
-[ext_resource type="Texture2D" uid="uid://c0llubdqun72s" path="res://icon.svg" id="1_lyfot"]
 [ext_resource type="Script" uid="uid://ubbuu1yfs4rt" path="res://scenes/cadaver.gd" id="1_wj5dd"]
+[ext_resource type="SpriteFrames" uid="uid://b566vhryiy5mr" path="res://resources/enemy.tres" id="2_wj5dd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wj5dd"]
-radius = 69.050705
+radius = 14.422205
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lyfot"]
-radius = 101.49384
+radius = 21.540659
 
 [node name="StaticBody2D" type="StaticBody2D"]
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_wj5dd")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0.09411765, 1, 0.26666668, 1)
-texture = ExtResource("1_lyfot")
+sprite_frames = ExtResource("2_wj5dd")
+frame = 3
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wj5dd")
@@ -26,4 +30,8 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReviveRadius"]
 shape = SubResource("CircleShape2D_lyfot")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+
 [connection signal="area_exited" from="ReviveRadius" to="." method="_on_revive_radius_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

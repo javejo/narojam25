@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbs8k07e75vtb"]
+
+[ext_resource type="Theme" uid="uid://dw1jdc6r8yojs" path="res://scenes/CARD_THEME.tres" id="1_nrbdt"]
+[ext_resource type="Script" uid="uid://bkwqn8xf6gejh" path="res://scenes/abilities/more_lifespan.gd" id="2_s0owh"]
+[ext_resource type="Texture2D" uid="uid://bcy8xddua1buu" path="res://assets/sprites_beta/enemy_skeleton.png" id="2_x25w0"]
+
+[node name="Button4" type="Button"]
+custom_minimum_size = Vector2(300, 500)
+theme = ExtResource("1_nrbdt")
+script = ExtResource("2_s0owh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -20.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "INCREASE MINION
+LIFESPAN"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_x25w0")
+expand_mode = 4

@@ -1,0 +1,97 @@
+[gd_scene load_steps=10 format=3 uid="uid://bnuouygf0am1w"]
+
+[ext_resource type="Script" uid="uid://g6ua8hq2emr3" path="res://scripts/enemy.gd" id="1_md0e3"]
+[ext_resource type="Resource" uid="uid://bqt2roop3itjx" path="res://resources/skeleton.tres" id="2_md0e3"]
+[ext_resource type="SpriteFrames" uid="uid://b566vhryiy5mr" path="res://resources/enemy.tres" id="3_4ra3w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipns3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_md0e3"]
+radius = 8.062258
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ra3w"]
+radius = 41.04875
+
+[sub_resource type="Animation" id="Animation_8qclf"]
+resource_name = "moving"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_w8i8w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_otmr2"]
+_data = {
+&"RESET": SubResource("Animation_w8i8w"),
+&"moving": SubResource("Animation_8qclf")
+}
+
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 11
+script = ExtResource("1_md0e3")
+stats = ExtResource("2_md0e3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("3_4ra3w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_ipns3")
+
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_md0e3")
+
+[node name="Damage" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 31
+text = "HIT"
+horizontal_alignment = 1
+
+[node name="Hitbox" type="Area2D" parent="." groups=["Enemy"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_4ra3w")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_otmr2")
+}
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

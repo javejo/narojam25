@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3 uid="uid://btbfadutuekuh"]
+
+[ext_resource type="Script" uid="uid://b4rpivqgbryyv" path="res://scripts/enemy_stats.gd" id="1_3uk5s"]
+[ext_resource type="Texture2D" uid="uid://dx77ogfanopdo" path="res://assets/sprites_beta/enemy_zombie.png" id="2_pot77"]
+
+[resource]
+script = ExtResource("1_3uk5s")
+health = 15.0
+speed = 5.0
+sprite = ExtResource("2_pot77")
+enemy_type = "zombie"
+metadata/_custom_type_script = "uid://b4rpivqgbryyv"

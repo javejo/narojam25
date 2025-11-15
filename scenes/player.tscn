@@ -1,29 +1,126 @@
-[gd_scene load_steps=5 format=3 uid="uid://dp6516dnx1wd3"]
+[gd_scene load_steps=10 format=3 uid="uid://dp6516dnx1wd3"]
 
-[ext_resource type="Texture2D" uid="uid://c0llubdqun72s" path="res://icon.svg" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://yh8i07quj8wu" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://ckcu0xafar7qm" path="res://assets/sprites_beta/player_body.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://d2h5h04f2px5w" path="res://assets/sprites_beta/player_hand.png" id="3_dqkch"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
-radius = 65.00769
+radius = 13.038404
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
 radius = 73.552704
 
+[sub_resource type="Animation" id="Animation_qhqgy"]
+resource_name = "hand_move"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerHand:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.34906584, 0.48891646, -0.34906584]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerBody:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.03, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dqkch"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerHand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.34906584]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerBody:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qlg0r"]
+resource_name = "moving"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerBody:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.16, 1.12), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qlg0r"]
+_data = {
+&"RESET": SubResource("Animation_dqkch"),
+&"hand_move": SubResource("Animation_qhqgy"),
+&"moving": SubResource("Animation_qlg0r")
+}
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-collision_mask = 2
+scale = Vector2(2, 2)
+collision_mask = 14
 script = ExtResource("1_g2els")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_3vyb7")
+[node name="PlayerBody" type="Sprite2D" parent="."]
+texture = ExtResource("2_qhqgy")
+
+[node name="PlayerHand" type="Sprite2D" parent="."]
+position = Vector2(-1.0000002, 1)
+rotation = -0.34906584
+texture = ExtResource("3_dqkch")
+offset = Vector2(2.6253476, -2.1881592)
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_g2els")
-disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 
 [node name="Hurtbox" type="Area2D" parent="." groups=["Player"]]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_qhqgy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qlg0r")
+}
+
+[node name="AbilityTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="AbilityTimer" to="." method="_on_ability_timer_timeout"]

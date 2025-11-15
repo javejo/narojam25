@@ -1,29 +1,165 @@
-[gd_scene load_steps=6 format=3 uid="uid://chdy66xmh5ggv"]
+[gd_scene load_steps=14 format=3 uid="uid://chdy66xmh5ggv"]
 
 [ext_resource type="Script" uid="uid://dol0gjgmxqpi0" path="res://ally.gd" id="1_p4fys"]
 [ext_resource type="Script" uid="uid://b4rpivqgbryyv" path="res://scripts/enemy_stats.gd" id="2_lwk5t"]
 [ext_resource type="Texture2D" uid="uid://cunnr5ejxffvm" path="res://assets/sprites_beta/skeleton.png" id="2_xx1w2"]
+[ext_resource type="Texture2D" uid="uid://bcy8xddua1buu" path="res://assets/sprites_beta/enemy_skeleton.png" id="4_lwk5t"]
 
-[sub_resource type="Resource" id="Resource_darf4"]
+[sub_resource type="Resource" id="Resource_xx1w2"]
 script = ExtResource("2_lwk5t")
-health = 10.0
-speed = 50.0
+speed = 10.0
 sprite = ExtResource("2_xx1w2")
 metadata/_custom_type_script = "uid://b4rpivqgbryyv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lwk5t"]
 radius = 13.0
 
+[sub_resource type="Animation" id="Animation_lwk5t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 1, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xx1w2"]
+resource_name = "walking"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1.42, 2.815), Vector2(2, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_darf4"]
+resource_name = "fading"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2538017, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 1, 0, 1), Color(0.49, 0.49, 0.49, 1), Color(0, 1, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_darf4"]
+_data = {
+&"RESET": SubResource("Animation_lwk5t"),
+&"fading": SubResource("Animation_darf4"),
+&"walking": SubResource("Animation_xx1w2")
+}
+
+[sub_resource type="Animation" id="Animation_ouaj8"]
+resource_name = "fading"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 1, 0, 1), Color(0.6039, 0.61, 0.6039, 1), Color(0, 1, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_136s5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 1, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lwx6x"]
+_data = {
+&"RESET": SubResource("Animation_136s5"),
+&"fading": SubResource("Animation_ouaj8")
+}
+
 [node name="Ally" type="CharacterBody2D"]
-collision_layer = 4
-collision_mask = 2
+collision_layer = 16
+collision_mask = 26
 script = ExtResource("1_p4fys")
-stats = SubResource("Resource_darf4")
+stats = SubResource("Resource_xx1w2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0, 1, 0, 1)
 scale = Vector2(2, 2)
-texture = ExtResource("2_xx1w2")
+texture = ExtResource("4_lwk5t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lwk5t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_darf4")
+}
+
+[node name="AttackTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(18, 0)
+
+[node name="Lifespan" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="Fading" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lwx6x")
+}
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="Lifespan" to="." method="_on_lifespan_timeout"]
+[connection signal="timeout" from="Fading" to="." method="_on_fading_timeout"]

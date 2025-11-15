@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://dsgljdagxyyd3"]
+
+[ext_resource type="Script" uid="uid://o2i2rh17bd2v" path="res://level_up_screen.gd" id="1_5l1el"]
+[ext_resource type="PackedScene" uid="uid://cukanugrwvygq" path="res://scenes/abilities/more_attack.tscn" id="2_qmtfy"]
+[ext_resource type="PackedScene" uid="uid://cjra7fki3wp4i" path="res://scenes/abilities/less_cooldown.tscn" id="3_sr6tv"]
+[ext_resource type="PackedScene" uid="uid://bbs8k07e75vtb" path="res://scenes/abilities/more_lifespan.tscn" id="4_qmtfy"]
+[ext_resource type="PackedScene" uid="uid://c3ppc7b1uvy4v" path="res://scenes/abilities/radius_increased.tscn" id="5_sr6tv"]
+
+[node name="LevelUpScreen" type="CanvasLayer"]
+script = ExtResource("1_5l1el")
+ability_pool = Array[PackedScene]([ExtResource("3_sr6tv"), ExtResource("2_qmtfy"), ExtResource("4_qmtfy"), ExtResource("5_sr6tv")])
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5137255)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -500.0
+offset_top = 60.0
+offset_right = 500.0
+offset_bottom = 148.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "LEVEL UP BABY!"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 149
+alignment = 1
