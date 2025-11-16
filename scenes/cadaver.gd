@@ -18,3 +18,7 @@ func _on_revive_radius_area_exited(area: Area2D) -> void:
 
 func _on_timer_timeout() -> void:
 	queue_free()
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free()
