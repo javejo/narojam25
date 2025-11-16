@@ -1,4 +1,7 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://blxdgoc32cw6n"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://blxdgoc32cw6n"]
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_1jkhg"]
+resource_name = "LowPassFilter"
 
 [resource]
 bus/0/volume_db = -2.5124817
@@ -8,6 +11,8 @@ bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = -2.5102587
 bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectLowPassFilter_1jkhg")
+bus/1/effect/0/enabled = false
 bus/2/name = &"SFX"
 bus/2/solo = false
 bus/2/mute = false

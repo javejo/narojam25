@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://dw1jdc6r8yojs" path="res://scenes/CARD_THEME.tres" id="1_2ix1f"]
 [ext_resource type="Script" uid="uid://cg00n3bf3tcfv" path="res://scenes/abilities/radius_increased.gd" id="2_0mnwj"]
-[ext_resource type="Texture2D" uid="uid://bcy8xddua1buu" path="res://assets/sprites_beta/enemy_skeleton.png" id="2_8b7mu"]
+[ext_resource type="Texture2D" uid="uid://ce73c1wbjpriu" path="res://assets/sprites_beta/abilities/ability_magglass.png" id="3_8b7mu"]
 
 [node name="Button3" type="Button"]
 custom_minimum_size = Vector2(300, 500)
@@ -28,7 +28,9 @@ horizontal_alignment = 1
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("2_8b7mu")
+texture = ExtResource("3_8b7mu")
+expand_mode = 5
+stretch_mode = 5
 
 [node name="Label2" type="Label" parent="VBoxContainer"]
 layout_mode = 2

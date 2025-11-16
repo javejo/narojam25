@@ -6,21 +6,25 @@ var game_paused: bool = false
 @onready var exit_button: Button = $CenterContainer/VBoxContainer/VBoxContainer/PauseExit
 @onready var resume_button: Button = $CenterContainer/VBoxContainer/VBoxContainer/Resume
 
+var bus_index: int
 
 func _ready() -> void:
 	visible = false
+	bus_index = AudioServer.get_bus_index("BGM")
 
 func pause():
 	#get_tree().paused = true
-	$"../../BGM".set_stream_paused(true)
+	#$"../../BGM".set_stream_paused(true)
 	Engine.time_scale = 0
+	AudioServer.set_bus_effect_enabled(bus_index,0,true)
 	game_paused = true
 	visible = true
 	
 func resume():
 	#get_tree().paused = false
-	$"../../BGM".set_stream_paused(false)
+	#$"../../BGM".set_stream_paused(false)
 	Engine.time_scale = 1
+	AudioServer.set_bus_effect_enabled(bus_index,0,false)
 	game_paused = false
 	visible = false
 	
