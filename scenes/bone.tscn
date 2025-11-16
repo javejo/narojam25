@@ -43,13 +43,15 @@ _data = {
 &"spin": SubResource("Animation_kq1tw")
 }
 
-[node name="Node2D" type="CharacterBody2D"]
+[node name="Node2D" type="CharacterBody2D" groups=["Weapons"]]
+scale = Vector2(2, 2)
 script = ExtResource("1_f60gj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_mm6ww")
 
 [node name="BoneHitbox" type="Area2D" parent="." groups=["Weapons"]]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BoneHitbox"]
 shape = SubResource("CircleShape2D_f60gj")

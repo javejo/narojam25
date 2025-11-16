@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://g6ua8hq2emr3" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Resource" uid="uid://bqt2roop3itjx" path="res://resources/skeleton.tres" id="2_md0e3"]
 [ext_resource type="Theme" uid="uid://dw1jdc6r8yojs" path="res://scenes/CARD_THEME.tres" id="3_4ra3w"]
+[ext_resource type="Texture2D" uid="uid://bcy8xddua1buu" path="res://assets/sprites_beta/enemy_skeleton.png" id="3_c4w8v"]
 [ext_resource type="AudioStream" uid="uid://4d7gd468jspv" path="res://assets/audio/hit.ogg" id="4_5uy6h"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ipns3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_md0e3"]
 radius = 8.062258
@@ -128,7 +127,7 @@ _data = {
 }
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
-scale = Vector2(2, 2)
+scale = Vector2(4, 4)
 collision_layer = 2
 collision_mask = 11
 script = ExtResource("1_md0e3")
@@ -136,7 +135,7 @@ stats = ExtResource("2_md0e3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 1)
-texture = SubResource("AtlasTexture_ipns3")
+texture = ExtResource("3_c4w8v")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_md0e3")
@@ -160,6 +159,7 @@ theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
 
 [node name="Hitbox" type="Area2D" parent="." groups=["Enemy"]]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_4ra3w")

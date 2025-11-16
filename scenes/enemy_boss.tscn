@@ -1,13 +1,103 @@
-[gd_scene load_steps=8 format=3 uid="uid://bbgdbh873f1c2"]
+[gd_scene load_steps=14 format=3 uid="uid://bbgdbh873f1c2"]
 
 [ext_resource type="Texture2D" uid="uid://cscwjfm5wk0lc" path="res://assets/sprites_beta/enemy_boss.png" id="1_5xr4n"]
 [ext_resource type="Script" uid="uid://dpa2pf7o7yn0k" path="res://scenes/enemy_boss.gd" id="1_xu5hf"]
+[ext_resource type="FontFile" uid="uid://bqmadcfqbj82l" path="res://assets/fonts/dungeon-mode.ttf" id="4_bdlgx"]
+[ext_resource type="AudioStream" uid="uid://4d7gd468jspv" path="res://assets/audio/hit.ogg" id="4_lujot"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xu5hf"]
 radius = 35.014282
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lq6pu"]
-radius = 54.147945
+radius = 69.0
+
+[sub_resource type="Animation" id="Animation_pxn6j"]
+resource_name = "hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 1, 1), Color(1, 1, 1, 1), Color(1, 0, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1ofvn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_alvbq"]
+_data = {
+&"RESET": SubResource("Animation_1ofvn"),
+&"hit": SubResource("Animation_pxn6j")
+}
+
+[sub_resource type="Animation" id="Animation_lujot"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Damage:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Damage:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Damage:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.4, 1.4)]
+}
 
 [sub_resource type="Animation" id="Animation_bdlgx"]
 resource_name = "moving"
@@ -26,24 +116,50 @@ tracks/0/keys = {
 "values": [Vector2(3, 3), Vector2(3.19, 3.54), Vector2(3, 3)]
 }
 
-[sub_resource type="Animation" id="Animation_lujot"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_lq6pu"]
+resource_name = "hit"
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/path = NodePath("Damage:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.16666667, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(3, 3)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Damage:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.4, 1.4)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Damage:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pxn6j"]
 _data = {
 &"RESET": SubResource("Animation_lujot"),
+&"hit": SubResource("Animation_lq6pu"),
 &"moving": SubResource("Animation_bdlgx")
 }
 
@@ -59,10 +175,17 @@ texture = ExtResource("1_5xr4n")
 position = Vector2(0, 11)
 shape = SubResource("CircleShape2D_xu5hf")
 
-[node name="Hurtbox" type="Area2D" parent="." groups=["Boss"]]
+[node name="Hurtbox" type="Area2D" parent="." groups=["Boss", "Enemy"]]
+collision_layer = 2
+collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_lq6pu")
+
+[node name="HitAnimationPlayer" type="AnimationPlayer" parent="Hurtbox"]
+libraries = {
+&"": SubResource("AnimationLibrary_alvbq")
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -70,5 +193,23 @@ libraries = {
 }
 
 [node name="Damage" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.4, 1.4)
+pivot_offset = Vector2(20, 23)
+theme_override_fonts/font = ExtResource("4_bdlgx")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_lujot")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

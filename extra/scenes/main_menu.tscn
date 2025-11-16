@@ -112,16 +112,17 @@ scale = Vector2(20, 20)
 texture = ExtResource("6_cauu2")
 
 [node name="GameTitle" type="RichTextLabel" parent="."]
-custom_minimum_size = Vector2(1000, 150)
-offset_left = 460.0
-offset_top = 465.0
-offset_right = 1460.0
-offset_bottom = 615.0
+custom_minimum_size = Vector2(1000, 300)
+offset_left = -5.0
+offset_top = 382.0
+offset_right = 1925.0
+offset_bottom = 532.0
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("7_3n8ph")
-theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/normal_font_size = 84
 bbcode_enabled = true
-text = "[center]ESBIRRUNKIN[/center]"
+text = "[shake rate=20.0 level=5 connected=1][center]ESBIRRUNKIN[/center]
+[/shake]"
 
 [node name="MainMenu" type="CenterContainer" parent="."]
 anchors_preset = 15

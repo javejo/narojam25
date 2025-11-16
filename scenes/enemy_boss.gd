@@ -5,49 +5,35 @@ var player = null
 var health = 1000
 var speed = 100
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var hit_animation_player: AnimationPlayer = $Hurtbox/HitAnimationPlayer
+@onready var sprite: Sprite2D = $Sprite2D
+const GAME_OVER = preload("uid://dsr84ps025j56")
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+
 #const CADAVER = preload("uid://bbpnohwlm26rf")
 const PARTICLES = preload("uid://dhlgpgokl7fow")
 const ENEMY = preload("uid://bnuouygf0am1w")
 
-@export var enemies: Array[EnemyStats] = [
-	preload("uid://bqt2roop3itjx"),
-	preload("uid://duxpb3dbll4ff"),
-	preload("uid://btbfadutuekuh")	
-	
-]
-
 @onready var damage: Label = $Damage
-#@onready var hitbox: CollisionShape2D = $Hurtbox
 
 signal enemy_died
 
 func _ready():
 	player = get_tree().get_first_node_in_group("Player")
 	animation_player.play("moving")
-	for i in 10:
-		spawn_enemy(enemies.pick_random())
 
-func spawn_enemy(stats: EnemyStats):
-	var spawned_enemy: Enemy = ENEMY.instantiate()
-	spawned_enemy.boss = $"."
-	add_child(spawned_enemy)
-	spawned_enemy.position = Vector2(global_position.x + randi_range(1,10), global_position.y + randi_range(1,10))
-	
 func _physics_process(delta):
 	if player:
 		position = position.move_toward(player.global_position, delta * speed)
-		#look_at(player.position)
 		move_and_slide()
 
-
-
-func _on_hitbox_area_entered(area: Area2D) -> void:
-	if area.is_in_group("Weapons"):
-		hit()
-	
 func hit():
+	print("OUCH!")
+	$AudioStreamPlayer.play()
 	health -= int(floor(Globals.bone_damage))
 	animation_player.play("hit")
+	hit_animation_player.play("hit")
+	await get_tree().create_timer(0.5).timeout
 	damage.text = str(int(Globals.bone_damage))
 	
 	if health <= 0:
@@ -56,6 +42,8 @@ func hit():
 	
 
 func die():
+	var game_over = GAME_OVER.instantiate()
+	get_tree().root.add_child(game_over)
 	enemy_died.emit()
 	queue_free()
 	var particles = PARTICLES.instantiate()
@@ -64,3 +52,8 @@ func die():
 	particles.emitting = true
 	await get_tree().create_timer(0.5).timeout
 	queue_free()
+
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Weapons"):
+		hit()

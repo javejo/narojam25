@@ -8,7 +8,6 @@ radius = 21.58269
 
 [node name="ReviveArea" type="Sprite2D"]
 self_modulate = Color(0, 1, 0, 0.7490196)
-scale = Vector2(3, 3)
 texture = ExtResource("1_wovxu")
 script = ExtResource("1_akbc0")
 

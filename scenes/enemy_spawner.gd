@@ -52,6 +52,8 @@ func _on_difficulty_increased() -> void:
 
 func spawn_boss():
 	var boss_instance = ENEMY_BOSS.instantiate()
+	boss_instance.position = Vector2(player.global_position.x + randi_range(-100, 100),
+	player.global_position.y + randi_range(-100, 100))
 	add_child(boss_instance)
 	
 	var enemy_instance = ENEMY.instantiate()

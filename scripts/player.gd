@@ -16,6 +16,7 @@ var xp: float = 0
 var level: int = 1
 var xp_requirement: float = 10
 var ability_ready: bool = true
+var immunity_time: float = 0.5
 
 var health = 100
 
@@ -73,10 +74,14 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Boss"):
 		health -= 5
 		health_changed.emit()
-		
+	
+	player_body.material.set("shader_parameter/flash_amount", 1)
+	player_hand.material.set("shader_parameter/flash_amount", 1)
 	$Hitbox.set_deferred("disabled", true)
 	$Hurtbox/CollisionShape2D.set_deferred("disabled", true)
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(immunity_time).timeout
+	player_body.material.set("shader_parameter/flash_amount", 0)
+	player_hand.material.set("shader_parameter/flash_amount", 0)
 	$Hitbox.set_deferred("disabled", false)
 	$Hurtbox/CollisionShape2D.set_deferred("disabled", false)
 	

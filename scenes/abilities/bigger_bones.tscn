@@ -1,15 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjra7fki3wp4i"]
+[gd_scene load_steps=4 format=3 uid="uid://cnc6snvkbktaf"]
 
-[ext_resource type="Theme" uid="uid://dw1jdc6r8yojs" path="res://scenes/CARD_THEME.tres" id="1_cibjm"]
-[ext_resource type="Script" uid="uid://cdnhrmxf6runh" path="res://scenes/abilities/less_cooldown.gd" id="2_wdgbu"]
-[ext_resource type="Texture2D" uid="uid://b4isebucoml73" path="res://assets/sprites_beta/abilities/ability_book.png" id="3_gm42d"]
+[ext_resource type="Theme" uid="uid://dw1jdc6r8yojs" path="res://scenes/CARD_THEME.tres" id="1_6cm2e"]
+[ext_resource type="Script" uid="uid://bj47t20jrmq1r" path="res://scenes/abilities/bigger_bones.gd" id="2_6cm2e"]
+[ext_resource type="Texture2D" uid="uid://b4jm8rwsolqti" path="res://assets/sprites_beta/abilities/ability_bones.png" id="3_6cm2e"]
 
-[node name="LessCooldown" type="Button"]
+[node name="BiggerBones" type="Button"]
 custom_minimum_size = Vector2(300, 500)
 offset_right = 300.0
 offset_bottom = 500.0
-theme = ExtResource("1_cibjm")
-script = ExtResource("2_wdgbu")
+theme = ExtResource("1_6cm2e")
+script = ExtResource("2_6cm2e")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -21,25 +21,25 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 1
-theme = ExtResource("1_cibjm")
+theme = ExtResource("1_6cm2e")
 theme_override_font_sizes/font_size = 32
-text = "QUICK
-LEARNING"
+text = "BIGGER
+BONES"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("3_gm42d")
+texture = ExtResource("3_6cm2e")
 expand_mode = 5
 stretch_mode = 5
 
 [node name="Label2" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "REVIVE COOLDOWN
-REDUCTION"
+size_flags_vertical = 1
+text = "INCREASE BONE
+SIZE"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

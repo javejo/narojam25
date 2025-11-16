@@ -7,6 +7,9 @@ const LEVEL_UP_SCREEN = preload("uid://dsgljdagxyyd3")
 const CADAVER = preload("uid://bbpnohwlm26rf")
 const GAME_OVER = preload("uid://dsr84ps025j56")
 const PAUSE_MENU = preload("uid://dn0ft4j8c7qy")
+@onready var count_up: Label = $"../UI/CountUp"
+@onready var clock_timer: Timer = $"../UI/CountUp/ClockTimer"
+var total_time_in_seconds: int = 0
 
 
 var difficulty = 1
@@ -16,6 +19,7 @@ signal difficulty_increased
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	clock_timer.start()
 	enemy_manager.enemy_died.connect(_on_enemy_died) # Replace with function body.
 	player.player_died.connect(_on_player_died)
 	xp_bar.value = player.xp
@@ -54,3 +58,12 @@ func _on_player_died():
 	Engine.time_scale = 0
 	var gameover = GAME_OVER.instantiate()
 	get_tree().root.add_child(gameover)
+
+# Count up timer
+func _on_clock_timer_timeout() -> void:
+	print(total_time_in_seconds)
+	total_time_in_seconds += 1
+	var m = int(total_time_in_seconds/60)
+	var s = total_time_in_seconds - (m * 60)
+	
+	count_up.text = "%02d:%02d" % [m, s]

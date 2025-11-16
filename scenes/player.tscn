@@ -1,14 +1,55 @@
-[gd_scene load_steps=14 format=3 uid="uid://dp6516dnx1wd3"]
+[gd_scene load_steps=19 format=3 uid="uid://dp6516dnx1wd3"]
 
 [ext_resource type="Script" uid="uid://yh8i07quj8wu" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Shader" uid="uid://csb1d84m31718" path="res://scenes/flashing.gdshader" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://ckcu0xafar7qm" path="res://assets/sprites_beta/player_body.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://d2h5h04f2px5w" path="res://assets/sprites_beta/player_hand.png" id="3_dqkch"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qlg0r"]
+shader = ExtResource("2_dqkch")
+shader_parameter/color_a = Color(0.69803923, 0.69803923, 0.69803923, 0)
+shader_parameter/color_b = Color(1, 1, 1, 1)
+shader_parameter/colors_affect_alpha = false
+shader_parameter/flash_amount = 0.0
+shader_parameter/flash_speed = 10.0
+shader_parameter/transparency = 1.0
+shader_parameter/intensity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dqkch"]
+shader = ExtResource("2_dqkch")
+shader_parameter/color_a = Color(0.69803923, 0.69803923, 0.69803923, 0)
+shader_parameter/color_b = Color(1, 1, 1, 1)
+shader_parameter/colors_affect_alpha = false
+shader_parameter/flash_amount = 0.0
+shader_parameter/flash_speed = 10.0
+shader_parameter/transparency = 1.0
+shader_parameter/intensity = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
 radius = 13.038404
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
-radius = 73.552704
+radius = 15.018739
+
+[sub_resource type="Animation" id="Animation_tuyoq"]
+resource_name = "HIT"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../PlayerBody:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fjrip"]
+_data = {
+&"HIT": SubResource("Animation_tuyoq")
+}
 
 [sub_resource type="Animation" id="Animation_dqkch"]
 length = 0.001
@@ -105,14 +146,16 @@ width = 32
 height = 5
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-scale = Vector2(2, 2)
+scale = Vector2(4, 4)
 collision_mask = 14
 script = ExtResource("1_g2els")
 
 [node name="PlayerBody" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_qlg0r")
 texture = ExtResource("2_qhqgy")
 
 [node name="PlayerHand" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_dqkch")
 position = Vector2(-1.0000002, 1)
 rotation = -0.34906584
 texture = ExtResource("3_dqkch")
@@ -126,10 +169,16 @@ shape = SubResource("CircleShape2D_g2els")
 position_smoothing_enabled = true
 
 [node name="Hurtbox" type="Area2D" parent="." groups=["Player"]]
-visible = false
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_qhqgy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hurtbox"]
+libraries = {
+&"": SubResource("AnimationLibrary_fjrip")
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
