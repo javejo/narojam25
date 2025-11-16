@@ -6,6 +6,8 @@
 
 [node name="LessCooldown" type="Button"]
 custom_minimum_size = Vector2(300, 500)
+offset_right = 300.0
+offset_bottom = 500.0
 theme = ExtResource("1_cibjm")
 script = ExtResource("2_wdgbu")
 
@@ -16,17 +18,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -58.0
-offset_top = -20.0
-offset_right = 58.0
-offset_bottom = 20.0
+offset_left = -160.0
+offset_top = -185.5
+offset_right = 160.0
+offset_bottom = 185.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "DECREASE REVIVE
-COOLDOWN"
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme = ExtResource("1_cibjm")
+text = "REVIVE
+COOLDOWN
+REDUCTION"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]

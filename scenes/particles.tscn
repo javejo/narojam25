@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhlgpgokl7fow"]
+[gd_scene load_steps=3 format=3 uid="uid://dhlgpgokl7fow"]
+
+[ext_resource type="Script" uid="uid://cis8v0n1kkiy6" path="res://scenes/particles.gd" id="1_xmlf0"]
 
 [sub_resource type="Gradient" id="Gradient_ynjm5"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -17,3 +19,11 @@ initial_velocity_max = 63.51
 scale_amount_min = 6.0
 scale_amount_max = 14.0
 color_ramp = SubResource("Gradient_ynjm5")
+script = ExtResource("1_xmlf0")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsr84ps025j56"]
+
+[ext_resource type="Script" uid="uid://ch0iqyyjudf5u" path="res://scenes/game_over.gd" id="1_tbwuq"]
+[ext_resource type="FontFile" uid="uid://coxs1vyvcw8g" path="res://assets/fonts/Lamano.ttf" id="1_wqhvx"]
+[ext_resource type="Theme" uid="uid://dw1jdc6r8yojs" path="res://scenes/CARD_THEME.tres" id="2_tbwuq"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 128
+script = ExtResource("1_tbwuq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.78431374)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1920, 150)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_wqhvx")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center][shake rate=20.0 level=5 connected=1]GAME OVER[/shake]"
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_tbwuq")
+text = "START NEW GAME"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

@@ -22,7 +22,7 @@ func _ready():
 func _physics_process(delta):
 	if player:
 
-		marker_2d.look_at(-player.position)
+		marker_2d.look_at(get_global_mouse_position())
 		speed = player.speed
 		var direction = (player.global_position - global_position).normalized()
 		var distance = global_position.distance_to(player.global_position)

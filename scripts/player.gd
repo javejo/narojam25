@@ -4,10 +4,12 @@ extends CharacterBody2D
 @onready var revive_area: Sprite2D = $ReviveArea
 const REVIVE_AREA = preload("uid://b7dg1bewj5um2")
 @onready var player_hand: Sprite2D = $PlayerHand
+@onready var player_body: Sprite2D = $PlayerBody
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var enemy_manager: Node = $"../EnemyManager"
 @onready var ability_timer: Timer = $AbilityTimer
 @onready var revive_progress: TextureProgressBar = %ReviveProgress
+@onready var health_bar: TextureProgressBar = $HealthBar
 
 
 var xp: float = 0
@@ -15,15 +17,27 @@ var level: int = 1
 var xp_requirement: float = 20
 var ability_ready: bool = true
 
-#signal revive
+var health = 3
+
+signal health_changed
+signal player_died
 
 func _ready() -> void:
 	animation_player.play("hand_move")
 	ability_timer.wait_time = Globals.ability_cooldown
+	health_bar.value = health
 
 func _physics_process(delta):
 	var direction = Input.get_vector("left", "right", "up", "down")
 	velocity = direction * speed
+
+	if direction.x < 0:
+		player_body.flip_h = true
+		player_hand.flip_h = true
+	else:
+		player_body.flip_h = false
+		player_hand.flip_h = false
+		
 
 	move_and_slide()
 	
@@ -49,3 +63,28 @@ func _physics_process(delta):
 
 func _on_ability_timer_timeout() -> void:
 	ability_ready = true
+
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Enemy"):
+		health -= 1
+		health_changed.emit()
+	if area.is_in_group("Boss"):
+		health -= 5
+		health_changed.emit()
+	$Hurtbox/CollisionShape2D.disabled = true
+	await get_tree().create_timer(1).timeout
+	$Hurtbox/CollisionShape2D.disabled = false
+
+
+
+		
+func _on_health_changed() -> void:
+	health_bar.value = health
+	if health <= 0:
+		player_died.emit()
+		queue_free()
+
+
+func _on_button_pressed() -> void:
+	enemy_manager.spawn_boss()

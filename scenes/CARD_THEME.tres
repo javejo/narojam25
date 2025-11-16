@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dw1jdc6r8yojs"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dw1jdc6r8yojs"]
+
+[ext_resource type="FontFile" uid="uid://bqmadcfqbj82l" path="res://assets/fonts/dungeon-mode.ttf" id="1_u3w3x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qnf7f"]
 bg_color = Color(0.049164966, 0.14023167, 0.02072332, 1)
@@ -10,6 +12,10 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u3w3x"]
 bg_color = Color(0, 0, 0, 1)
@@ -21,6 +27,10 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rat2e"]
 bg_color = Color(0.13682574, 0.13682574, 0.13682568, 1)
@@ -32,6 +42,10 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6kks1"]
 content_margin_left = 5.0
@@ -53,8 +67,10 @@ expand_margin_right = 5.0
 expand_margin_bottom = 5.0
 
 [resource]
+Button/fonts/font = ExtResource("1_u3w3x")
 Button/styles/hover = SubResource("StyleBoxFlat_qnf7f")
 Button/styles/normal = SubResource("StyleBoxFlat_u3w3x")
 Button/styles/pressed = SubResource("StyleBoxFlat_rat2e")
 Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_u3w3x")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_6kks1")

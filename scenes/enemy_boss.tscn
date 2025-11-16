@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://bbgdbh873f1c2"]
+
+[ext_resource type="Texture2D" uid="uid://cscwjfm5wk0lc" path="res://assets/sprites_beta/enemy_boss.png" id="1_5xr4n"]
+[ext_resource type="Script" uid="uid://dpa2pf7o7yn0k" path="res://scenes/enemy_boss.gd" id="1_xu5hf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xu5hf"]
+radius = 35.014282
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lq6pu"]
+radius = 54.147945
+
+[sub_resource type="Animation" id="Animation_bdlgx"]
+resource_name = "moving"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(3.19, 3.54), Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_lujot"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pxn6j"]
+_data = {
+&"RESET": SubResource("Animation_lujot"),
+&"moving": SubResource("Animation_bdlgx")
+}
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_xu5hf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 1, 1)
+scale = Vector2(3, 3)
+texture = ExtResource("1_5xr4n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 11)
+shape = SubResource("CircleShape2D_xu5hf")
+
+[node name="Hurtbox" type="Area2D" parent="." groups=["Boss"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_lq6pu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_pxn6j")
+}
+
+[node name="Damage" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnuouygf0am1w"]
+[gd_scene load_steps=11 format=3 uid="uid://bnuouygf0am1w"]
 
 [ext_resource type="Script" uid="uid://g6ua8hq2emr3" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Resource" uid="uid://bqt2roop3itjx" path="res://resources/skeleton.tres" id="2_md0e3"]
+[ext_resource type="Theme" uid="uid://dw1jdc6r8yojs" path="res://scenes/CARD_THEME.tres" id="3_4ra3w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipns3"]
 
@@ -9,7 +10,7 @@
 radius = 8.062258
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ra3w"]
-radius = 41.04875
+radius = 9.617692
 
 [sub_resource type="Animation" id="Animation_w8i8w"]
 length = 0.001
@@ -128,7 +129,7 @@ _data = {
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 scale = Vector2(2, 2)
 collision_layer = 2
-collision_mask = 9
+collision_mask = 11
 script = ExtResource("1_md0e3")
 stats = ExtResource("2_md0e3")
 
@@ -145,19 +146,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = -22.0
-offset_right = 25.0
-offset_bottom = 22.0
+offset_left = -25.5
+offset_top = -9.0
+offset_right = 24.5
+offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(25, 22)
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 31
+theme = ExtResource("3_4ra3w")
+theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
 
 [node name="Hitbox" type="Area2D" parent="." groups=["Enemy"]]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_4ra3w")
@@ -167,4 +168,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_otmr2")
 }
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 120.0
+one_shot = true
+autostart = true
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

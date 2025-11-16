@@ -32,6 +32,7 @@ shape = SubResource("CircleShape2D_lyfot")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
+one_shot = true
 
 [connection signal="area_exited" from="ReviveRadius" to="." method="_on_revive_radius_area_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
