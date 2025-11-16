@@ -19,7 +19,7 @@ func _ready():
 	$Sprite2D.texture = stats.sprite
 	player = get_tree().get_first_node_in_group("Player")
 	animation_player.play("moving")
-	health = stats.health
+	health = stats.health * Globals.enemy_life_scale
 	#speed = stats.speed
 	
 func _physics_process(delta):
@@ -47,6 +47,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		#queue_free()
 
 func hit():
+	$AudioStreamPlayer.play()
 	health -= int(floor(Globals.bone_damage))
 	#damage.show()
 	animation_player.play("hit")
@@ -65,8 +66,9 @@ func spawn_cadaver():
 	
 
 func die():
+	$AudioStreamPlayer.play()
 	enemy_died.emit()
-	if randi_range(1, 10) > 5:
+	if randi_range(1, 10) > 3:
 		spawn_cadaver()
 	queue_free()
 	var particles = PARTICLES.instantiate()

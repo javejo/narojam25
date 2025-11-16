@@ -1,0 +1,120 @@
+[gd_scene load_steps=12 format=3 uid="uid://dh6pt0vqsyf6v"]
+
+[ext_resource type="Script" uid="uid://bghjwftrtfit4" path="res://scripts/main_scene.gd" id="1_w2twt"]
+[ext_resource type="PackedScene" uid="uid://dn0ft4j8c7qy" path="res://scenes/pause_menu.tscn" id="2_pw63i"]
+[ext_resource type="Shader" uid="uid://domx60jd7lgbm" path="res://assets/shaders/looping.gdshader" id="3_gubc5"]
+[ext_resource type="Texture2D" uid="uid://ddepm2glc3bw0" path="res://assets/sprites/checkered_texture.png" id="4_rt2n2"]
+[ext_resource type="Theme" uid="uid://dcw0uwn05xlqe" path="res://assets/themes/menus.tres" id="5_c16ls"]
+[ext_resource type="AudioStream" uid="uid://v0haj2x0w5e1" path="res://assets/audio/bgm/pokemon_wifi_bgm.mp3" id="6_rt2n2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_18nlu"]
+shader = ExtResource("3_gubc5")
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/speed = 0.5
+
+[sub_resource type="Animation" id="Animation_18nlu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
+
+[sub_resource type="Animation" id="Animation_c16ls"]
+resource_name = "music_fadein"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_c1pb6"]
+resource_name = "music_fadeout"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6wevv"]
+_data = {
+&"RESET": SubResource("Animation_18nlu"),
+&"music_fadein": SubResource("Animation_c16ls"),
+&"music_fadeout": SubResource("Animation_c1pb6")
+}
+
+[node name="MainScene" type="Node"]
+script = ExtResource("1_w2twt")
+main_menu = "res://scenes/main_menu.tscn"
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_pw63i")]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_18nlu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rt2n2")
+stretch_mode = 1
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="PanelContainer" parent="CenterContainer2"]
+layout_mode = 2
+theme = ExtResource("5_c16ls")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer2/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer2/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "MAIN SCENE :D"
+
+[node name="Button" type="Button" parent="CenterContainer2/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "go back"
+
+[node name="Node" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node"]
+stream = ExtResource("6_rt2n2")
+volume_db = -80.0
+autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node"]
+libraries = {
+&"": SubResource("AnimationLibrary_6wevv")
+}
+
+[connection signal="pressed" from="CenterContainer2/CenterContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

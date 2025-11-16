@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bnuouygf0am1w"]
+[gd_scene load_steps=12 format=3 uid="uid://bnuouygf0am1w"]
 
 [ext_resource type="Script" uid="uid://g6ua8hq2emr3" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Resource" uid="uid://bqt2roop3itjx" path="res://resources/skeleton.tres" id="2_md0e3"]
 [ext_resource type="Theme" uid="uid://dw1jdc6r8yojs" path="res://scenes/CARD_THEME.tres" id="3_4ra3w"]
+[ext_resource type="AudioStream" uid="uid://4d7gd468jspv" path="res://assets/audio/hit.ogg" id="4_5uy6h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipns3"]
 
@@ -172,6 +173,10 @@ libraries = {
 wait_time = 120.0
 one_shot = true
 autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_5uy6h")
+bus = &"SFX"
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

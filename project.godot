@@ -11,13 +11,18 @@ config_version=5
 [application]
 
 config/name="Narojam25"
-run/main_scene="uid://b2wy67ffsruy1"
+run/main_scene="uid://b63hwlxb8q80i"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="uid://blxdgoc32cw6n"
 
 [autoload]
 
 Globals="*res://scripts/Globals.gd"
+SceneTransition="*res://extra/scenes/scene_transition.tscn"
 
 [display]
 
@@ -80,3 +85,4 @@ escape={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

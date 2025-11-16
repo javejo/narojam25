@@ -16,6 +16,8 @@ const ENEMY_BOSS = preload("uid://bbgdbh873f1c2")
 var max_enemies: int = 50
 var enemy_number: int = 0
 
+var enemy_life_scale: float = 1.0
+
 signal enemy_died
 
 func _ready() -> void:
@@ -37,6 +39,7 @@ func _on_timer_timeout() -> void:
 func spawn_enemy(stats: EnemyStats):
 	var spawned_enemy: Enemy = ENEMY.instantiate()
 	spawned_enemy.stats = stats
+	#spawned_enemy.health = enemy_life_scale * spawned_enemy.health
 	spawned_enemy.enemy_died.connect(_on_enemy_died)
 	add_child(spawned_enemy)
 	spawned_enemy.global_position = Vector2(randi_range(-1000,1000), randi_range(-1000,1000))
@@ -45,6 +48,7 @@ func spawn_enemy(stats: EnemyStats):
 
 func _on_difficulty_increased() -> void:
 	$Timer.wait_time = 0.95 * $Timer.wait_time
+	Globals.enemy_life_scale += 0.2
 
 func spawn_boss():
 	var boss_instance = ENEMY_BOSS.instantiate()

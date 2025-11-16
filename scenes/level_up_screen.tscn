@@ -1,12 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://dsgljdagxyyd3"]
+[gd_scene load_steps=8 format=3 uid="uid://dsgljdagxyyd3"]
 
 [ext_resource type="Script" uid="uid://o2i2rh17bd2v" path="res://level_up_screen.gd" id="1_5l1el"]
 [ext_resource type="PackedScene" uid="uid://cukanugrwvygq" path="res://scenes/abilities/more_attack.tscn" id="2_qmtfy"]
 [ext_resource type="PackedScene" uid="uid://cjra7fki3wp4i" path="res://scenes/abilities/less_cooldown.tscn" id="3_sr6tv"]
 [ext_resource type="PackedScene" uid="uid://bbs8k07e75vtb" path="res://scenes/abilities/more_lifespan.tscn" id="4_qmtfy"]
 [ext_resource type="PackedScene" uid="uid://c3ppc7b1uvy4v" path="res://scenes/abilities/radius_increased.tscn" id="5_sr6tv"]
+[ext_resource type="FontFile" uid="uid://coxs1vyvcw8g" path="res://assets/fonts/Lamano.ttf" id="6_ro60h"]
+[ext_resource type="AudioStream" uid="uid://b6xsltmf0k2jp" path="res://assets/audio/level_up.ogg" id="6_sr6tv"]
 
 [node name="LevelUpScreen" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_5l1el")
 ability_pool = Array[PackedScene]([ExtResource("3_sr6tv"), ExtResource("2_qmtfy"), ExtResource("4_qmtfy"), ExtResource("5_sr6tv")])
 
@@ -19,6 +22,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.5137255)
 
 [node name="Label" type="Label" parent="."]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -27,8 +31,9 @@ offset_top = 60.0
 offset_right = 500.0
 offset_bottom = 148.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("6_ro60h")
 theme_override_font_sizes/font_size = 64
-text = "LEVEL UP BABY!"
+text = "LEVEL UP!!!"
 horizontal_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
@@ -43,3 +48,20 @@ size_flags_horizontal = 4
 layout_mode = 2
 theme_override_constants/separation = 149
 alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+process_mode = 3
+custom_minimum_size = Vector2(1920, 150)
+offset_left = 4.0
+offset_top = 27.0
+offset_right = 1924.0
+offset_bottom = 223.0
+theme_override_fonts/normal_font = ExtResource("6_ro60h")
+theme_override_font_sizes/normal_font_size = 92
+bbcode_enabled = true
+text = "[rainbow freq=1.0 sat=0.8 val=0.8 speed=1.0][center]LEVEL UP![/center][/rainbow]"
+fit_content = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_sr6tv")
+bus = &"SFX"

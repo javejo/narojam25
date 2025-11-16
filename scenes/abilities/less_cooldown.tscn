@@ -13,15 +13,12 @@ script = ExtResource("2_wdgbu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 13
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -160.0
-offset_top = -185.5
-offset_right = 160.0
-offset_bottom = 185.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_right = 120.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -30,15 +27,21 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
 theme = ExtResource("1_cibjm")
-text = "REVIVE
-COOLDOWN
-REDUCTION"
+theme_override_font_sizes/font_size = 32
+text = "QUICK
+LEARNING"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("2_gm42d")
-expand_mode = 4
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "REVIVE COOLDOWN
+REDUCTION"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

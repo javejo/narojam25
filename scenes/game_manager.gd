@@ -6,6 +6,8 @@ extends Node
 const LEVEL_UP_SCREEN = preload("uid://dsgljdagxyyd3")
 const CADAVER = preload("uid://bbpnohwlm26rf")
 const GAME_OVER = preload("uid://dsr84ps025j56")
+const PAUSE_MENU = preload("uid://dn0ft4j8c7qy")
+
 
 var difficulty = 1
 @onready var difficulty_timer: Timer = $DifficultyTimer

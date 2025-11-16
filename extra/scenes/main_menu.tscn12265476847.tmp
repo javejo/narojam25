@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjlox57dgtqm5"]
+
+[ext_resource type="Script" uid="uid://dkgged3cqqisb" path="res://scenes/main_menu.gd" id="1_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://ddm2eykcq8mse" path="res://icon.svg" id="1_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://dljmso05w0bje" path="res://sprites/game_title.png" id="1_l6cm7"]
+[ext_resource type="Theme" uid="uid://bbhqnvntbu5b0" path="res://scenes/buttons.tres" id="5_8ln24"]
+[ext_resource type="PackedScene" uid="uid://dsyheem445tk8" path="res://scenes/options_menu.tscn" id="5_rtw2f"]
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_bqqt6")
+
+[node name="BackgroundImage" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_ekxnf")
+expand_mode = 4
+stretch_mode = 1
+
+[node name="MainMenu" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="GameTitle" type="TextureRect" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_l6cm7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0.2, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="StartGame" type="Button" parent="MainMenu/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("5_8ln24")
+text = "START GAME"
+
+[node name="Options" type="Button" parent="MainMenu/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_8ln24")
+text = "OPTIONS"
+
+[node name="Exit" type="Button" parent="MainMenu/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_8ln24")
+text = "EXIT"
+
+[node name="OptionsMenu" parent="." instance=ExtResource("5_rtw2f")]
+
+[connection signal="pressed" from="MainMenu/VBoxContainer/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

@@ -1,0 +1,243 @@
+[gd_scene load_steps=15 format=3 uid="uid://cjlox57dgtqm5"]
+
+[ext_resource type="Script" uid="uid://dkgged3cqqisb" path="res://extra/scripts/main_menu.gd" id="1_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://bcy8xddua1buu" path="res://assets/sprites_beta/enemy_skeleton.png" id="2_h4xqb"]
+[ext_resource type="AudioStream" uid="uid://ifk7pu8pkfri" path="res://extra/assets/audio/bgm/sample_music.mp3" id="2_oa1go"]
+[ext_resource type="Texture2D" uid="uid://bjpreyc14n2x4" path="res://assets/sprites_beta/enemy_slime.png" id="3_k56ly"]
+[ext_resource type="Texture2D" uid="uid://dx77ogfanopdo" path="res://assets/sprites_beta/enemy_zombie.png" id="4_i8uy1"]
+[ext_resource type="Theme" uid="uid://dcw0uwn05xlqe" path="res://extra/assets/themes/menus.tres" id="4_wu84c"]
+[ext_resource type="Texture2D" uid="uid://ckcu0xafar7qm" path="res://assets/sprites_beta/player_body.png" id="5_w1b15"]
+[ext_resource type="Texture2D" uid="uid://d2h5h04f2px5w" path="res://assets/sprites_beta/player_hand.png" id="6_cauu2"]
+[ext_resource type="FontFile" uid="uid://coxs1vyvcw8g" path="res://assets/fonts/Lamano.ttf" id="7_3n8ph"]
+[ext_resource type="PackedScene" uid="uid://ny1xt77lloo1" path="res://extra/scenes/menus/volume_slider.tscn" id="7_tbmy8"]
+[ext_resource type="Theme" uid="uid://dw1jdc6r8yojs" path="res://scenes/CARD_THEME.tres" id="8_bfhxl"]
+
+[sub_resource type="Animation" id="Animation_tbmy8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SampleMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_oa1go"]
+resource_name = "audio_fadeout"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SampleMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -57.219]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jk1qb"]
+_data = {
+&"RESET": SubResource("Animation_tbmy8"),
+&"audio_fadeout": SubResource("Animation_oa1go")
+}
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_bqqt6")
+MAIN_SCENE = "C:/Users/javejo/Documents/GitHub/narojam25/scenes/main.tscn"
+
+[node name="BackgroundImage" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 840.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+modulate = Color(0.20152658, 0.20152658, 0.20152658, 1)
+offset_left = 1157.0
+offset_top = 117.00001
+offset_right = 1197.0
+offset_bottom = 157.0
+scale = Vector2(10, 10)
+texture = ExtResource("2_h4xqb")
+flip_h = true
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+modulate = Color(0.20152658, 0.20152658, 0.20152658, 1)
+offset_left = 1512.0
+offset_top = 390.00003
+offset_right = 1552.0
+offset_bottom = 430.00003
+scale = Vector2(10, 10)
+texture = ExtResource("3_k56ly")
+flip_h = true
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+modulate = Color(0.20152658, 0.20152658, 0.20152658, 1)
+offset_left = 1115.0
+offset_top = 647.00006
+offset_right = 1155.0
+offset_bottom = 687.00006
+scale = Vector2(10, 10)
+texture = ExtResource("4_i8uy1")
+flip_h = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.20152658, 0.20152658, 0.20152658, 1)
+offset_left = 15.999985
+offset_top = 146.0
+offset_right = 55.999985
+offset_bottom = 186.0
+scale = Vector2(20, 20)
+texture = ExtResource("5_w1b15")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+modulate = Color(0.20152658, 0.20152658, 0.20152658, 1)
+offset_left = 15.999985
+offset_top = 146.0
+offset_right = 55.999985
+offset_bottom = 186.0
+scale = Vector2(20, 20)
+texture = ExtResource("6_cauu2")
+
+[node name="GameTitle" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(1000, 150)
+offset_left = 460.0
+offset_top = 465.0
+offset_right = 1460.0
+offset_bottom = 615.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("7_3n8ph")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]ESBIRRUNKIN[/center]"
+
+[node name="MainMenu" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 154.0
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0.2, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 30
+
+[node name="StartGame" type="Button" parent="MainMenu/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("8_bfhxl")
+text = "START GAME"
+
+[node name="Options" type="Button" parent="MainMenu/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_bfhxl")
+text = "OPTIONS"
+
+[node name="Exit" type="Button" parent="MainMenu/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_bfhxl")
+text = "EXIT"
+
+[node name="OptionsMenu" type="CenterContainer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="OptionsMenu"]
+layout_mode = 2
+theme = ExtResource("4_wu84c")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsMenu/PanelContainer"]
+layout_mode = 2
+
+[node name="OptionsHeader" type="Label" parent="OptionsMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_bfhxl")
+text = "AUDIO SETTINGS"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionsMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Master" type="Label" parent="OptionsMenu/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_bfhxl")
+text = "Master"
+
+[node name="VolumeSlider" parent="OptionsMenu/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("7_tbmy8")]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="OptionsMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Music" type="Label" parent="OptionsMenu/PanelContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("8_bfhxl")
+text = "BGM   "
+
+[node name="VolumeSlider" parent="OptionsMenu/PanelContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("7_tbmy8")]
+layout_mode = 2
+bus_name = "BGM"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="OptionsMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="SFX" type="Label" parent="OptionsMenu/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("8_bfhxl")
+text = "SFX   "
+
+[node name="VolumeSlider" parent="OptionsMenu/PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("7_tbmy8")]
+layout_mode = 2
+bus_name = "SFX"
+
+[node name="Back" type="Button" parent="OptionsMenu/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("8_bfhxl")
+text = "BACK"
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="SampleMusic" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("2_oa1go")
+autoplay = true
+bus = &"BGM"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Audio"]
+libraries = {
+&"": SubResource("AnimationLibrary_jk1qb")
+}
+
+[connection signal="pressed" from="MainMenu/VBoxContainer/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="OptionsMenu/PanelContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

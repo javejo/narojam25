@@ -14,10 +14,10 @@ const REVIVE_AREA = preload("uid://b7dg1bewj5um2")
 
 var xp: float = 0
 var level: int = 1
-var xp_requirement: float = 20
+var xp_requirement: float = 10
 var ability_ready: bool = true
 
-var health = 3
+var health = 100
 
 signal health_changed
 signal player_died
@@ -69,12 +69,20 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemy"):
 		health -= 1
 		health_changed.emit()
+		
 	if area.is_in_group("Boss"):
 		health -= 5
 		health_changed.emit()
-	$Hurtbox/CollisionShape2D.disabled = true
-	await get_tree().create_timer(1).timeout
-	$Hurtbox/CollisionShape2D.disabled = false
+		
+	$Hitbox.set_deferred("disabled", true)
+	$Hurtbox/CollisionShape2D.set_deferred("disabled", true)
+	await get_tree().create_timer(2).timeout
+	$Hitbox.set_deferred("disabled", false)
+	$Hurtbox/CollisionShape2D.set_deferred("disabled", false)
+	
+
+
+
 
 
 

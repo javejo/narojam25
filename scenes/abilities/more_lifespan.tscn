@@ -19,16 +19,25 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 6
-text = "INCREASE 
-MINION
-LIFESPAN"
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 32
+text = "CALCIUM
+SUPPLEMENT"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
 texture = ExtResource("2_x25w0")
-expand_mode = 4
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "INCREASED
+MINION 
+LIFESPAN"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]
