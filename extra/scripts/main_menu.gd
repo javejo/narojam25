@@ -8,6 +8,7 @@ extends Node
 # Main Menu Buttons
 func _on_start_game_pressed() -> void:
 	SceneTransition.change_scene(MAIN_SCENE, "scroll")
+	Globals.start_game()
 	$Audio/AnimationPlayer.play("audio_fadeout")
 	
 func _on_options_pressed() -> void:

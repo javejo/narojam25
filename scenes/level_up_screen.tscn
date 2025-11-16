@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dsgljdagxyyd3"]
+[gd_scene load_steps=10 format=3 uid="uid://dsgljdagxyyd3"]
 
 [ext_resource type="Script" uid="uid://o2i2rh17bd2v" path="res://level_up_screen.gd" id="1_5l1el"]
 [ext_resource type="PackedScene" uid="uid://cukanugrwvygq" path="res://scenes/abilities/more_attack.tscn" id="2_qmtfy"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cnc6snvkbktaf" path="res://scenes/abilities/bigger_bones.tscn" id="6_aohmo"]
 [ext_resource type="FontFile" uid="uid://coxs1vyvcw8g" path="res://assets/fonts/Lamano.ttf" id="6_ro60h"]
 [ext_resource type="AudioStream" uid="uid://b6xsltmf0k2jp" path="res://assets/audio/level_up.ogg" id="6_sr6tv"]
+[ext_resource type="AudioStream" uid="uid://b1rsul2w7kqcx" path="res://assets/audio/win_sound.wav" id="9_qeego"]
 
 [node name="LevelUpScreen" type="CanvasLayer"]
 process_mode = 3
@@ -65,4 +66,8 @@ fit_content = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_sr6tv")
+bus = &"SFX"
+
+[node name="AbilitySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_qeego")
 bus = &"SFX"

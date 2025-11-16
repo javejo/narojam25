@@ -2,7 +2,9 @@ extends CanvasLayer
 
 @export var ability_pool: Array[PackedScene]
 @onready var container: HBoxContainer = $CenterContainer/HBoxContainer
+@onready var ability_sound: AudioStreamPlayer = $AbilitySound
 
+signal powerup_chosen
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$AudioStreamPlayer.play()
@@ -23,7 +25,7 @@ func pause():
 	
 func resume():
 	Engine.time_scale = 1
-	queue_free()
+	call_deferred("queue_free")
 
 
 
@@ -34,5 +36,6 @@ func resume():
 
 func _on_ability_selected():
 	print("Ability selected")
+	$AbilitySound.play()
 	resume()		
 	#queue_free()

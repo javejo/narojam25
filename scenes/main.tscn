@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://b2wy67ffsruy1"]
+[gd_scene load_steps=20 format=4 uid="uid://b2wy67ffsruy1"]
 
 [ext_resource type="TileSet" uid="uid://cq07f0jcwbepm" path="res://scenes/tileset.tres" id="1_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://dp6516dnx1wd3" path="res://scenes/player.tscn" id="2_0wfyh"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dn0ft4j8c7qy" path="res://extra/scenes/pause_menu.tscn" id="9_85g3d"]
 [ext_resource type="Shader" uid="uid://c1n8eu6yv332h" path="res://resources/crt.gdshader" id="9_choun"]
 [ext_resource type="AudioStream" uid="uid://ckp04lelciims" path="res://assets/audio/main_theme.mp3" id="11_eb6dy"]
+[ext_resource type="AudioStream" uid="uid://b1rsul2w7kqcx" path="res://assets/audio/win_sound.wav" id="11_trceg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ya4ey"]
 bg_color = Color(0.05197096, 0.051970966, 0.051970914, 1)
@@ -189,6 +190,9 @@ autostart = true
 [node name="PauseMenu" parent="GameManager" instance=ExtResource("9_85g3d")]
 layer = 128
 visible = false
+
+[node name="AbilityChosen" type="AudioStreamPlayer" parent="GameManager"]
+stream = ExtResource("11_trceg")
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_eb6dy")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsr84ps025j56"]
+[gd_scene load_steps=5 format=3 uid="uid://dsr84ps025j56"]
 
 [ext_resource type="Script" uid="uid://ch0iqyyjudf5u" path="res://scenes/game_over.gd" id="1_tbwuq"]
 [ext_resource type="FontFile" uid="uid://coxs1vyvcw8g" path="res://assets/fonts/Lamano.ttf" id="1_wqhvx"]
 [ext_resource type="Theme" uid="uid://dw1jdc6r8yojs" path="res://scenes/CARD_THEME.tres" id="2_tbwuq"]
+[ext_resource type="AudioStream" uid="uid://dasf1q2shgj8i" path="res://assets/audio/lose_sound.wav" id="4_racf3"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 128
@@ -40,5 +41,10 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_tbwuq")
 text = "START NEW GAME"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_racf3")
+autoplay = true
+bus = &"SFX"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

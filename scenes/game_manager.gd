@@ -43,9 +43,11 @@ func level_up():
 	player.xp_requirement = floor(player.xp_requirement + (0.2 * player.xp_requirement))
 	player.level += 1
 	var levelup_scene = LEVEL_UP_SCREEN.instantiate()
+	levelup_scene.powerup_chosen.connect(_on_powerup_chosen)
 	get_tree().root.add_child(levelup_scene)
 	
-
+func _on_powerup_chosen():
+	$AbilityChosen.play()
 
 func _on_difficulty_timer_timeout() -> void:
 	difficulty += 1

@@ -44,6 +44,7 @@ func hit():
 func die():
 	var game_over = GAME_OVER.instantiate()
 	get_tree().root.add_child(game_over)
+	game_over.label.text = "[center][shake rate=20.0 level=5 connected=1]YOU WIN![/shake]"
 	enemy_died.emit()
 	queue_free()
 	var particles = PARTICLES.instantiate()
