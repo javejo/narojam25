@@ -34,13 +34,11 @@ func spawn_cadavers():
 
 func _on_enemy_died():
 	player.xp += 1
-	print((100 * player.xp) / player.xp_requirement)
 	xp_bar.value = (100 * player.xp) / player.xp_requirement
 	if player.xp >= player.xp_requirement:
 		level_up()
 	
 func level_up():
-	print("LEVEL UP!")
 	player.xp = 0
 	player.xp_requirement = floor(player.xp_requirement + (0.2 * player.xp_requirement))
 	player.level += 1
@@ -61,7 +59,6 @@ func _on_player_died():
 
 # Count up timer
 func _on_clock_timer_timeout() -> void:
-	print(total_time_in_seconds)
 	total_time_in_seconds += 1
 	var m = int(total_time_in_seconds/60)
 	var s = total_time_in_seconds - (m * 60)

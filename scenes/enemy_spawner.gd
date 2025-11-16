@@ -26,7 +26,6 @@ func _ready() -> void:
 	#player_level.value = player.xp / player.xp_requirement
 
 func _on_enemy_died():
-	print("Enemy died")
 	enemy_died.emit()
 	enemy_number -= 1
 

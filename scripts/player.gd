@@ -18,7 +18,7 @@ var xp_requirement: float = 10
 var ability_ready: bool = true
 var immunity_time: float = 0.5
 
-var health = 100
+var health = 50
 
 signal health_changed
 signal player_died
@@ -26,6 +26,7 @@ signal player_died
 func _ready() -> void:
 	animation_player.play("hand_move")
 	ability_timer.wait_time = Globals.ability_cooldown
+	health_bar.max_value = health
 	health_bar.value = health
 
 func _physics_process(delta):
@@ -35,7 +36,7 @@ func _physics_process(delta):
 	if direction.x < 0:
 		player_body.flip_h = true
 		player_hand.flip_h = true
-	else:
+	if direction.x > 0:
 		player_body.flip_h = false
 		player_hand.flip_h = false
 		
