@@ -61,7 +61,7 @@ _data = {
 script = ExtResource("1_hsxvm")
 images = Array[Texture2D]([ExtResource("2_ddqkm")])
 pause_time = 3.0
-MAIN_MENU = "C:/Users/javejo/Documents/GitHub/narojam25/extra/scenes/main_menu.tscn"
+MAIN_MENU = "res://extra/scenes/main_menu.tscn"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15

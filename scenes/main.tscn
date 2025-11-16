@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://ca2boru5m73jg" path="res://scenes/enemy_spawner.gd" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://dn0ft4j8c7qy" path="res://extra/scenes/pause_menu.tscn" id="9_85g3d"]
 [ext_resource type="Shader" uid="uid://c1n8eu6yv332h" path="res://resources/crt.gdshader" id="9_choun"]
-[ext_resource type="AudioStream" uid="uid://ifk7pu8pkfri" path="res://extra/assets/audio/bgm/sample_music.mp3" id="10_choun"]
+[ext_resource type="AudioStream" uid="uid://ckp04lelciims" path="res://assets/audio/main_theme.mp3" id="11_eb6dy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ya4ey"]
 bg_color = Color(0.05197096, 0.051970966, 0.051970914, 1)
@@ -191,9 +191,10 @@ layer = 128
 visible = false
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_choun")
+stream = ExtResource("11_eb6dy")
 autoplay = true
 bus = &"BGM"
+parameters/looping = true
 
 [node name="Area2D" type="Area2D" parent="."]
 

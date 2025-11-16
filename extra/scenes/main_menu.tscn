@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://cjlox57dgtqm5"]
+[gd_scene load_steps=14 format=3 uid="uid://cjlox57dgtqm5"]
 
 [ext_resource type="Script" uid="uid://dkgged3cqqisb" path="res://extra/scripts/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="Texture2D" uid="uid://bcy8xddua1buu" path="res://assets/sprites_beta/enemy_skeleton.png" id="2_h4xqb"]
-[ext_resource type="AudioStream" uid="uid://ifk7pu8pkfri" path="res://extra/assets/audio/bgm/sample_music.mp3" id="2_oa1go"]
 [ext_resource type="Texture2D" uid="uid://bjpreyc14n2x4" path="res://assets/sprites_beta/enemy_slime.png" id="3_k56ly"]
 [ext_resource type="Texture2D" uid="uid://dx77ogfanopdo" path="res://assets/sprites_beta/enemy_zombie.png" id="4_i8uy1"]
 [ext_resource type="Theme" uid="uid://dcw0uwn05xlqe" path="res://extra/assets/themes/menus.tres" id="4_wu84c"]
@@ -51,7 +50,7 @@ _data = {
 
 [node name="MainMenu" type="Node"]
 script = ExtResource("1_bqqt6")
-MAIN_SCENE = "C:/Users/javejo/Documents/GitHub/narojam25/scenes/main.tscn"
+MAIN_SCENE = "res://scenes/main.tscn"
 
 [node name="BackgroundImage" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -229,7 +228,6 @@ text = "BACK"
 [node name="Audio" type="Node" parent="."]
 
 [node name="SampleMusic" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("2_oa1go")
 autoplay = true
 bus = &"BGM"
 

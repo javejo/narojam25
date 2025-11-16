@@ -25,11 +25,6 @@ func resume():
 	Engine.time_scale = 1
 	queue_free()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("escape"):
-		resume()
-		#queue_free()
 
 
 #func _on_less_cooldown_pressed() -> void:
