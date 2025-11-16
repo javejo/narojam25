@@ -39,7 +39,8 @@ func _physics_process(delta):
 func _on_attack_timer_timeout() -> void:
 	var bone_instance = BONE.instantiate()
 	get_tree().root.add_child(bone_instance)
-	bone_instance.transform = marker_2d.global_transform
+	#bone_instance.transform = marker_2d.position
+	#bone_instance.scale = Globals.bone_scale
 	#bone_instance.position = position
 
 
