@@ -43,7 +43,7 @@ _data = {
 &"spin": SubResource("Animation_kq1tw")
 }
 
-[node name="Node2D" type="CharacterBody2D" groups=["Weapons"]]
+[node name="Node2D" type="Node2D" groups=["Weapons"]]
 scale = Vector2(2, 2)
 script = ExtResource("1_f60gj")
 

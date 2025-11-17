@@ -6,6 +6,7 @@ class_name Ally
 @onready var marker_2d: Marker2D = $Marker2D
 @onready var lifespan: Timer = $Lifespan
 var enemy_type: String
+var bone_scale = Globals.bone_scale
 
 @export var stats: EnemyStats
 var player = null
@@ -14,6 +15,7 @@ const BONE = preload("uid://dqncm2sqkp85b")
 
 func _ready():
 	lifespan.wait_time = Globals.ally_lifespan
+	#marker_2d.scale = Globals.bone_scale * Vector2.ONE
 	#$Sprite2D.texture = stats.sprite
 	player = get_tree().get_first_node_in_group("Player")
 	animation_player.play("walking")
@@ -39,7 +41,7 @@ func _physics_process(delta):
 func _on_attack_timer_timeout() -> void:
 	var bone_instance = BONE.instantiate()
 	get_tree().root.add_child(bone_instance)
-	marker_2d.scale = bone_instance.scale
+	marker_2d.scale = Globals.bone_scale * Vector2.ONE
 	bone_instance.transform = marker_2d.global_transform
 	#bone_instance.position = position
 
